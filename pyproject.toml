@@ -1,0 +1,15 @@
+[project]
+name = "github-activity"
+version = "0.1.0"
+requires-python = ">=3.8"
+dependencies = []
+
+[project.scripts]
+github-activity = "github_activity.main:main"
+
+[build-system]
+requires = ["flit_core>=3.2"]
+build-backend = "flit_core.buildapi"
+
+[tool.setuptools.packages.find]
+where = ["src"]

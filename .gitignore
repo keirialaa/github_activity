@@ -1,0 +1,24 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Package build artifacts
+dist/
+build/
+*.egg-info/
+
+# Environment variables 
+.env
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store       

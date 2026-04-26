@@ -42,7 +42,6 @@ def main():
         sys.exit(1)
     else:
         if len(user_data) != 0:
-            print("Output:")
             for event in user_data:
                 print(format_event(event))
         else:

@@ -2,14 +2,11 @@
 name = "github-activity"
 version = "0.1.0"
 requires-python = ">=3.8"
-dependencies = []
-
-[project.scripts]
-github-activity = "github_activity.main:main"
+dependencies = ["requests"]
 
 [build-system]
-requires = ["flit_core>=3.2"]
-build-backend = "flit_core.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/github_activity"]

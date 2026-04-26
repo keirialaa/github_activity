@@ -3,27 +3,30 @@ import requests
 
 from utils import validate_input, format_event
 
-def main():
 
-    def fetch_activity(username):
+def fetch_activity(username):
         response = requests.get(f"https://api.github.com/users/{username}/events")
         response.raise_for_status()
         return response
 
+
+def main():
     # Get and validate user input 
     user_input = sys.argv[1:]
-    if validate_input:
+    if validate_input(user_input):
         username = user_input[0]
     else:
-        print("Invalid input. Please enter a username.")
+        print("INVALID INPUT. Correct usage: python src/github_activity/main.py <username>")
         sys.exit(1)
     
     # Access the user through GitHub API 
     try:
         user_data = fetch_activity(username).json()
     except requests.exceptions.HTTPError as e:
-        # 404, 403, 500 etc.
-        print(f"HTTP error: {e}")
+        if e.response.status_code == 404:
+            print(f"User '{username}' not found.")
+        else:
+            print(f"HTTP error: {e.response.status_code}")
         sys.exit(1)
     except requests.exceptions.ConnectionError:
         # No internet, DNS failure, refused connection
@@ -40,8 +43,8 @@ def main():
     else:
         if len(user_data) != 0:
             print("Output:")
-        for event in user_data:
-            print(format_event(event))
+            for event in user_data:
+                print(format_event(event))
         else:
             print("No recent activity.")
 
